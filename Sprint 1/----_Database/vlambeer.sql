@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 20 nov 2015 om 11:07
+-- Gegenereerd op: 20 nov 2015 om 11:46
 -- Serverversie: 5.6.17
 -- PHP-versie: 5.5.12
 
@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `phone_nr` varchar(255) NOT NULL,
   `birthdate` date NOT NULL,
   `isadmin` tinyint(1) NOT NULL,
+  `hasnewsletter` tinyint(1) NOT NULL,
   `city` varchar(255) NOT NULL,
   `street` varchar(255) NOT NULL,
   `house_nr` varchar(255) NOT NULL,
