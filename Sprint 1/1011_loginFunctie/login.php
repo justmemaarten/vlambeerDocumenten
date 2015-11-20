@@ -1,22 +1,24 @@
 <?php
 switch( $_POST['type'] ) {
 case 'login' :
-        if(login($_POST['username'],
-            $_POST['password'])) {
-            header('location: ../../public/views/dashboard/dashboard.php');
+        if(login() {
+            header('location: ../../public/views/dashboard/dashboard.php'); //location will be based on the ROOT constant
+
         } else {
-            header('location: ../../public/views/auth/login.php');
+            header('location: ../../public/views/auth/login.php'); //location will be based on the ROOT constant
         }
         break;
 
 }
 
-function login($username, $password) {
+function login() {
     global $messageBag;
     global $db;
 
-    if(empty($username) ||
-        empty($password)) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if(empty($username) || empty($password)) {
         $messageBag->add('w', 'One or more fields are missing');
         return false;
     }
@@ -26,21 +28,25 @@ function login($username, $password) {
     $q->bindParam(':username', $username);
     $q->execute();
 
-    // kijkt of de rij al bestaat
-    if ($q->rowCount() > 0) {
-        $user = $q->fetch(PDO::FETCH_ASSOC);
-
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['user']['isadmin'] = $user['isadmin'];
-            $_SESSION['user']['id'] = $user['user_id'];
-            $messageBag->add('s', 'Welcome ' . $_SESSION['user']['username']);
-            return true;
-        } else {
-            $messageBag->add('w', 'Username or password are incorrect');
-        }
-    } else {
+    // Check if the row exists
+    if ($q->rowCount() == 0) {
         $messageBag->add('w', 'User does not excists');
         return false;
+    }
+
+    $user = $q->fetch(PDO::FETCH_ASSOC);
+
+    if (password_verify($password, $user['password'])) {
+
+        $_SESSION['user']['isadmin'] = $user['isadmin'];
+        $_SESSION['user']['id'] = $user['user_id'];
+        $messageBag->add('s', 'Welcome ' . $_SESSION['user']['username']);
+        
+        return true;
+
+    } else {
+
+        $messageBag->add('w', 'Username or password are incorrect');
     }
 
     return false;
