@@ -7,8 +7,9 @@ vlambeer\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Auth
 
 je moet ook nog dit downloaden via de terminal anders dan gaan de messages niet werken dit moet je doen
 
-
 typ dit in je terminal: composer require laracasts/flash
+typ daarna in je terminal: composer install
+
 
 
 hieronder is niet perse nodig dit heb ik al gedaan. misschien wel eventueel controlleren.
@@ -19,7 +20,6 @@ je moet 2 dingen veranderen daarna werkt het.(let goed op de namen providers en 
 'providers' => [
     'Laracasts\Flash\FlashServiceProvider'
 ];
-
 
 
 
